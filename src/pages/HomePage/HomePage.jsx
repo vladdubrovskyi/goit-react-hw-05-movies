@@ -1,6 +1,7 @@
 import { getTrendingMovies } from "components/api"
 import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+
+import TrendingList from "components/TrendingList/TrendingList"
 
 const HomePage = () => {
     const [trends, setTrends] = useState([])
@@ -15,14 +16,10 @@ const HomePage = () => {
         GetTrends()
     }, [])
 
-    return (<ul>
-        {trends.map(({title, id}) => {
-            return <li key={id}>
-                <NavLink to={`/movies/${id}`}>{title}
-                </NavLink>
-            </li>
-        })}
-    </ul>)
+    return (<main>
+        <TrendingList trends={ trends} />
+    </main>
+      )
 }
 
 export default HomePage
