@@ -4,7 +4,8 @@ import HomePage from "pages/HomePage/HomePage"
 import MovieDetails from "pages/MovieDetails/MovieDetails"
 import Cast from "components/Cast/Cast"
 import Reviews from "components/Reviews/Reviews"
-import { Routes, Route, Outlet } from "react-router-dom"
+import Movies from "pages/Movies/Movies"
+import { Routes, Route } from "react-router-dom"
 
 
 
@@ -13,7 +14,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage/>} />
-        <Route path="movies" element={<><Outlet/></>}>
+        <Route path="movies" element={<Movies/>}>
           <Route path=":movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
