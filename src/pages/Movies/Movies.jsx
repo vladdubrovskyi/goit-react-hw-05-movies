@@ -1,6 +1,6 @@
 import { Outlet, useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-import SearchBar from "components/SearchBar/SearchBar"
+
 import {getMovieByName } from "components/api"
 
 
@@ -13,9 +13,6 @@ const Movies = () => {
         setSearchParams(value !== "" ? {query : value} : {})
     }
 
-
-
-
     const query = searchParams.get("query") ?? "";
     
     
@@ -25,11 +22,11 @@ const Movies = () => {
             try {
                 const films = await getMovieByName(query)
                 setSearchedMovies(films)
-                console.log(films)
+                
             } catch (error) {console.log(error)}
         }
         GetMoviesName ()
-     }, [searchParams])
+     }, [query])
 
 
    
@@ -38,7 +35,10 @@ const Movies = () => {
 
 
     return (<main>
-        <SearchBar onChange={handleSubmit }  />
+        <form>
+            <input type="text" />
+            <button>Search</button>
+        </form>
         <Outlet/>
 
     </main>)
