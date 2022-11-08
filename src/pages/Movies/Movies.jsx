@@ -1,16 +1,26 @@
-import { Outlet, useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-
+import MovieList from "components/MovieList/MovieList"
 import {getMovieByName } from "components/api"
 
 
 
 const Movies = () => {
-    const [searchedMovies, setSearchedMovies] = useState([])
+    const [searchedMovies, setSearchedMovies] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()
-    
-    const handleSubmit = value => {
-        setSearchParams(value !== "" ? {query : value} : {})
+    const [searchQuery, setSearchQuery] = useState("")
+
+   
+    const handleSubmit = event => {
+        event.preventDefault()
+         const newQuery = event.target.elements.query.value.toLowerCase();
+    if (newQuery.trim() === '') {
+      alert("Please enter the movie");
+      return;
+    }
+        setSearchParams(searchQuery !== "" ? { query: searchQuery } : {})
+        
+       
     }
 
     const query = searchParams.get("query") ?? "";
@@ -21,8 +31,12 @@ const Movies = () => {
         async function GetMoviesName() {
             try {
                 const films = await getMovieByName(query)
+                if (films.length === 0) {
+                    alert("sorry we didn't find any movies")
+                    return
+                }
                 setSearchedMovies(films)
-                
+               
             } catch (error) {console.log(error)}
         }
         GetMoviesName ()
@@ -35,12 +49,12 @@ const Movies = () => {
 
 
     return (<main>
-        <form>
-            <input type="text" />
+        <form onSubmit={handleSubmit}>
+            <input type="text" name="query" onChange={(event)=> setSearchQuery(event.target.value)} />
             <button>Search</button>
         </form>
-        <Outlet/>
-
+        {searchedMovies && < MovieList movies={searchedMovies} />}
+     
     </main>)
 }
 

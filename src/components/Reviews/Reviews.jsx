@@ -10,20 +10,23 @@ const Reviews = () => {
         async function GetReviews() {
             try {
                 const review = await getReviewsById(movieId)
+                
                 setReviews(review)
+                
             } catch (error) { console.log(error) }
         }
         GetReviews()
     }, [movieId])
     
     return (<>
-        {reviews  && 
-            <ul>
+        {reviews.length === 0  ? <p>No reviews</p> : <ul>
                 {reviews.map(({author, id,content}) => {
                     return <li key={id}>
                         <p>Name : {author}</p>
-                        <p>Comment : {content }</p>
-</li>})}
+                        <p>Comment : {content}</p>
+                    </li>
+                })
+        }
             </ul>}
     </>)
        
