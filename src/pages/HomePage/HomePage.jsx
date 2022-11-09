@@ -17,6 +17,7 @@ const HomePage = () => {
     }, [])
 
     return (<main>
+        <h1>Trending today</h1>
         <TrendingList trends={ trends} />
     </main>
       )

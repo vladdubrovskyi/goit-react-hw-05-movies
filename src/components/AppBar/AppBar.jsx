@@ -1,18 +1,19 @@
-import { NavLink } from "react-router-dom"
 
+import {Header, Link} from "components/AppBar/AppBar.styled"
+import {StyledList} from "components/commonStyled/CommonStyledList"
 const AppBar = () => {
-    return  <header>
+    return  <Header>
         <nav>
-            <ul>
+            <StyledList>
                 <li>
-                <NavLink to ="/">Home</NavLink>
+                <Link to ="/">Home</Link>
                 </li>
                 <li>
-                <NavLink to ="movies">Movies</NavLink>
+                <Link to ="movies">Movies</Link>
                 </li>
-            </ul>
+            </StyledList>
         </nav>
-    </header>
+    </Header>
     
 }
 export default AppBar

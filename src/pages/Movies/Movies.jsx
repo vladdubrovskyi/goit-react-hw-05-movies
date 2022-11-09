@@ -1,8 +1,9 @@
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import MovieList from "components/MovieList/MovieList"
-import {getMovieByName } from "components/api"
-
+import { getMovieByName } from "components/api"
+import { StyledBtn } from "components/commonStyled/CommonStyledBtn"
+import { StyledInput } from "components/commonStyled/InputStyled"
 
 
 const Movies = () => {
@@ -50,8 +51,8 @@ const Movies = () => {
 
     return (<main>
         <form onSubmit={handleSubmit}>
-            <input type="text" name="query" onChange={(event)=> setSearchQuery(event.target.value)} />
-            <button>Search</button>
+            <StyledInput type="text" name="query" onChange={(event)=> setSearchQuery(event.target.value)} />
+            <StyledBtn>Search</StyledBtn>
         </form>
         {searchedMovies && < MovieList movies={searchedMovies} />}
      
